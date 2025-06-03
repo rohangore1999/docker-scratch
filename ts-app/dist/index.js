@@ -13,23 +13,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const http_1 = __importDefault(require("http"));
-const ioredis_1 = require("ioredis");
-const pg_1 = __importDefault(require("pg"));
 const server_1 = __importDefault(require("./app/server"));
+const ioredis_1 = __importDefault(require("ioredis"));
+const pg_1 = __importDefault(require("pg"));
 function init() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             // Redis Connection
             console.log(`Connecting Redis...`);
-            const redis = new ioredis_1.Redis("redis://redis:6379", { lazyConnect: true });
+            const redis = new ioredis_1.default("redis://localhost:6379", { lazyConnect: true });
             yield redis.connect();
             console.log(`Redis Connection Success...`);
             // Postgresql Connection
             console.log(`Connecting Postgres...`);
             const { Client } = pg_1.default;
             const client = new Client({
-                host: "db",
-                port: 5432,
+                host: "localhost",
+                port: 5431,
                 database: "postgres",
                 user: "postgres",
                 password: "postgres",
