@@ -1,6 +1,13 @@
 name: e-commerce-app
-
 services:
+  backend:
+    build: # create local image
+      context: .
+      dockerfile: Dockerfile # read this docker file from current dir
+    container_name: backend
+    ports:
+      - 8000:8000 # expose port 8000 of container to port 8000 of host
+
   db:
     image: postgres:16
     container_name: postgres
@@ -8,13 +15,22 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
       POSTGRES_DB: postgres
-    ports:
+    # ports:
       # check the default port of postgres
       # my_port : default_port
-      - 5431:5432
+      # - 5431:5432 << not exposing to outside world
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
   
   redis:
     image: redis:7-alpine
     container_name: redis
-    ports:
-      - 6379:6379
+    # ports:
+      # - 6379:6379 << not exposing to outside world
+
+volumes:
+  postgres_data:
+
+# The top-level volumes section declares that a volume named postgres_data should exist
+
+# The service-level volumes section mounts that named volume into the PostgreSQL container

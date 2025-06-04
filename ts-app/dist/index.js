@@ -21,15 +21,15 @@ function init() {
         try {
             // Redis Connection
             console.log(`Connecting Redis...`);
-            const redis = new ioredis_1.default("redis://localhost:6379", { lazyConnect: true });
+            const redis = new ioredis_1.default("redis://redis:6379", { lazyConnect: true });
             yield redis.connect();
             console.log(`Redis Connection Success...`);
             // Postgresql Connection
             console.log(`Connecting Postgres...`);
             const { Client } = pg_1.default;
             const client = new Client({
-                host: "localhost",
-                port: 5431,
+                host: "db",
+                port: 5432,
                 database: "postgres",
                 user: "postgres",
                 password: "postgres",
