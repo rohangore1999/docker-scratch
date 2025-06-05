@@ -28,9 +28,10 @@ COPY index.js index.js
 # If this image is run, run this command automatically
 CMD ["npm", "start"]
 
+ENV PORT=8000
 EXPOSE 8000
 
-# RUN -> docker build
-# CMD -> docker run
+# RUN -> execute when docker build
+# CMD -> execute when docker run
 
 # If anything changes in the layer (each line is layer), all the below layers will rerun

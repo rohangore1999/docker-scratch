@@ -302,3 +302,11 @@ docker run --env-file .env -p 4000:4000 ts-app
 ## 📄 License
 
 ISC License - see package.json for details.
+
+## AWS
+
+```
+ - docker build -t backend .
+ - docker tag backend:latest 682033490987.dkr.ecr.ap-south-1.amazonaws.com/backend:latest
+ - docker push 682033490987.dkr.ecr.ap-south-1.amazonaws.com/backend:latest
+```

@@ -5,6 +5,10 @@ app.get("/", (req, res) => {
   return res.json({ message: "Hello World" });
 });
 
+app.get("/health", (req, res) => {
+  return res.json({ message: "Server is running" });
+});
+
 app.listen(8000, () => {
   console.log("Server is running on port 8000");
 });
