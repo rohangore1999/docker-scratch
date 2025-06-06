@@ -14,6 +14,9 @@ FROM node:20.17.0-alpine3.20
 # after setting the workdir, all the below commands will be run in the workdir
 WORKDIR /home/app
 
+# install curl to check the health of the server
+RUN apk add --no-cache curl
+
 # copy source code into docker's image
 # if the package.json changes, we have to run the npm install again.
 COPY package.json package.json
@@ -30,6 +33,10 @@ CMD ["npm", "start"]
 
 ENV PORT=8000
 EXPOSE 8000
+
+# TO run health check in docker
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8000/health || exit 1
 
 # RUN -> execute when docker build
 # CMD -> execute when docker run
